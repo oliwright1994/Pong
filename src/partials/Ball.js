@@ -97,21 +97,7 @@ export default class Ball {
         ball.setAttributeNS(null, "cy", this.y)
         ball.setAttributeNS(null, "fill", GAMEOPTIONS.ballColor)
 
-        let path1 = document.createElementNS(SVG_NS, 'path')
-        path1.setAttributeNS(null, "d", `M ${this.x} ${(this.y - this.size)} Q ${this.x} ${this.y} ${(this.x + this.size)} ${this.y}`)
-        path1.setAttributeNS(null, "stroke-width", 3)
-        path1.setAttributeNS(null, "stroke", "white")
-        path1.setAttributeNS(null, "fill", "transparent")
-
-        let path2 = document.createElementNS(SVG_NS, 'path')
-        path2.setAttributeNS(null, "d", `M ${this.x} ${(this.y + this.size)} Q ${this.x} ${this.y} ${(this.x - this.size)} ${this.y}`)
-        path2.setAttributeNS(null, "stroke-width", 3)
-        path2.setAttributeNS(null, "stroke", "white")
-        path2.setAttributeNS(null, "fill", "transparent")
-
         mySvg.appendChild(ball)
-        mySvg.appendChild(path1)
-        mySvg.appendChild(path2)
 
 
         this.wallBounce()
