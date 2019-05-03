@@ -11,7 +11,7 @@ export const KEYS = {
   }
 
 export const GAMEOPTIONS = {
-    speed: 10,
+    speed: 30,
     paddleWidth: 8,
     paddleHeight: 56,
     boardGap: 10,

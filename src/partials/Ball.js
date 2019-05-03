@@ -1,4 +1,5 @@
 import { SVG_NS, GAMEOPTIONS } from "../settings"
+import helpers from "./helpers.js"
 
 export default class Ball {
     constructor(boardHeight, boardWidth, size, spaceKey) {
@@ -9,8 +10,8 @@ export default class Ball {
       this.vx = 0;
       this.vy = 0;
       this.spaceKey = spaceKey;
+      this.ping = new Audio
       this.reset()
-
 
       document.addEventListener('keydown', (event) => {
         if (event.key === this.spaceKey ){
@@ -21,13 +22,13 @@ export default class Ball {
 }
 
     reset(){
-            this.x = this.boardWidth / 2;
-            this.y = this.boardHeight / 2;
-          }
+        this.x = this.boardWidth / 2;
+        this.y = this.boardHeight / 2;
+    }
 
     ballMovementStart(){
-    this.vy = Math.floor(Math.random() * 10 - 5);
-    this.vx = this.direction * (6 - Math.abs(this.vy));
+        this.vy = Math.floor(Math.random() * 10 - 5);
+        this.vx = this.direction * (6 - Math.abs(this.vy));
     }
 
     wallBounce() {
@@ -37,15 +38,55 @@ export default class Ball {
         const hitLeft = this.x - this.size <= 0
         const hitRight = this.x + this.size >= this.boardWidth
 
-        if (hitLeft || hitRight) {
-            this.vx = -this.vx
-        }
-         else if (hitTop || hitBot) {
-            this.vy = -this.vy
-        }
+        if (hitTop || hitBot) {
+           this.vy = -this.vy
+       }
+
+        // else if (hitLeft || hitRight) {
+        //     this.vx = -this.vx
+        // }
     }
 
-    render(mySvg){
+    paddleBounce(player1, player2){
+
+        if (this.vx > 0){
+
+            const [leftX, rightX, topY, bottomY] = helpers.coordinates(
+                player2.x,
+                player2.y,
+                player2.width,
+                player2.height
+            )
+
+            if (
+                this.x + this.size >= leftX &&
+                (this.y >= topY && this.y <= bottomY)
+            )
+            {
+                this.vx = -this.vx
+            }
+        }
+
+        else {
+            const [_, rightX, topY, bottomY] = helpers.coordinates(
+                player1.x,
+                player1.y,
+                player1.width,
+                player1.height
+            )
+
+            if (
+                this.x - this.size <= rightX &&
+                (this.y >= topY && this.y <= bottomY)
+            )
+            {
+                this.vx = -this.vx
+            }
+        }
+
+    }
+
+    render(mySvg, player1, player2){
 
         this.x += this.vx;
         this.y += this.vy;
@@ -56,8 +97,24 @@ export default class Ball {
         ball.setAttributeNS(null, "cy", this.y)
         ball.setAttributeNS(null, "fill", GAMEOPTIONS.ballColor)
 
+        let path1 = document.createElementNS(SVG_NS, 'path')
+        path1.setAttributeNS(null, "d", `M ${this.x} ${(this.y - this.size)} Q ${this.x} ${this.y} ${(this.x + this.size)} ${this.y}`)
+        path1.setAttributeNS(null, "stroke-width", 3)
+        path1.setAttributeNS(null, "stroke", "white")
+        path1.setAttributeNS(null, "fill", "transparent")
+
+        let path2 = document.createElementNS(SVG_NS, 'path')
+        path2.setAttributeNS(null, "d", `M ${this.x} ${(this.y + this.size)} Q ${this.x} ${this.y} ${(this.x - this.size)} ${this.y}`)
+        path2.setAttributeNS(null, "stroke-width", 3)
+        path2.setAttributeNS(null, "stroke", "white")
+        path2.setAttributeNS(null, "fill", "transparent")
+
         mySvg.appendChild(ball)
+        mySvg.appendChild(path1)
+        mySvg.appendChild(path2)
+
 
         this.wallBounce()
+        this.paddleBounce(player1, player2)
     }
 }
