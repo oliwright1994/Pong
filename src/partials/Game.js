@@ -2,6 +2,7 @@ import { SVG_NS, KEYS, GAMEOPTIONS } from "../settings.js";
 import Board from "./Board.js";
 import Player from "./Player.js";
 import Ball from "./Ball.js";
+import Scoreboard from "./Scorboard.js";
 
 export default class Game {
   constructor(elementID, width, height) {
@@ -42,6 +43,13 @@ export default class Game {
       GAMEOPTIONS.ballSize,
       KEYS.spaceBar,
       )
+
+    this.scoreBoard = new Scoreboard (
+      this.width,
+      this.height,
+      )
+
+
 
       document.addEventListener('keydown', (event) => {
         if (event.key === KEYS.pauseKey ){
