@@ -55,7 +55,6 @@ export default class Game {
     this.player1.render(svg)
     this.player2.render(svg)
     this.gameBall.render(svg)
-    this.gameBall.ballMovement()
 
 
   }

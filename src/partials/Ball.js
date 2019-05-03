@@ -5,12 +5,11 @@ export default class Ball {
       this.boardHeight = boardHeight;
       this.boardWidth = boardWidth;
       this.size = size;
-      this.x = this.boardWidth/2;
-      this.y = this.boardHeight / 2;
       this.direction = 1;
       this.vx = 0;
       this.vy = 0;
       this.spaceKey = spaceKey;
+      this.reset()
 
 
       document.addEventListener('keydown', (event) => {
@@ -20,7 +19,6 @@ export default class Ball {
         }
     })
 }
-
 
     reset(){
             this.x = this.boardWidth / 2;
@@ -32,23 +30,18 @@ export default class Ball {
     this.vx = this.direction * (6 - Math.abs(this.vy));
     }
 
-    ballMovement(){
-        this.x += this.vx;
-        this.y += this.vy;
-
-    }
-
-
-
     render(mySvg){
-
         let ball = document.createElementNS(SVG_NS, 'circle')
+
         ball.setAttributeNS(null, "r", this.size)
         ball.setAttributeNS(null, "cx", this.x)
         ball.setAttributeNS(null, "cy", this.y)
         ball.setAttributeNS(null, "fill", GAMEOPTIONS.ballColor)
 
         mySvg.appendChild(ball)
+
+        this.x += this.vx;
+        this.y += this.vy;
     }
 
 }
