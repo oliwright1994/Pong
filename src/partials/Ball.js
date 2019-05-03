@@ -15,7 +15,6 @@ export default class Ball {
 
       document.addEventListener('keydown', (event) => {
         if (event.key === this.spaceKey ){
-          this.reset();
           this.ballMovementStart();
         }
     })
@@ -24,6 +23,8 @@ export default class Ball {
     reset(){
         this.x = this.boardWidth / 2;
         this.y = this.boardHeight / 2;
+        this.vy = 0;
+        this.vx = 0;
     }
 
     ballMovementStart(){
@@ -31,20 +32,26 @@ export default class Ball {
         this.vx = this.direction * (6 - Math.abs(this.vy));
     }
 
-    wallBounce() {
+    wallBounce(player1, player2) {
         const hitTop = this.y - this.size <= 0
         const hitBot = this.y + this.size >= this.boardHeight
 
-        const hitLeft = this.x - this.size <= 0
-        const hitRight = this.x + this.size >= this.boardWidth
+        const hitLeft = this.x <= 0
+        const hitRight = this.x >= this.boardWidth
 
         if (hitTop || hitBot) {
            this.vy = -this.vy
        }
 
-        // else if (hitLeft || hitRight) {
-        //     this.vx = -this.vx
-        // }
+       else if (hitRight) {
+           player1.score += 1
+           this.reset()
+
+       }
+       else if (hitLeft) {
+           player2.score += 1;
+           this.reset()
+       }
     }
 
     paddleBounce(player1, player2){
@@ -100,7 +107,7 @@ export default class Ball {
         mySvg.appendChild(ball)
 
 
-        this.wallBounce()
+        this.wallBounce(player1, player2)
         this.paddleBounce(player1, player2)
     }
 }
