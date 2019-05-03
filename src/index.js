@@ -12,3 +12,4 @@ const game = new Game('game', 512 , 256);
   requestAnimationFrame(gameLoop);
 })();
 //  game.render()
+

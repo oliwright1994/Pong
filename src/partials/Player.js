@@ -40,7 +40,7 @@ export default class Player {
         paddle.setAttributeNS(null, "height", this.height)
         paddle.setAttributeNS(null, "x", this.x)
         paddle.setAttributeNS(null, "y", this.y)
-        paddle.setAttributeNS(null, "fill", "white")
+        paddle.setAttributeNS(null, "fill", GAMEOPTIONS.paddleColor)
 
         mySvg.appendChild(paddle)
     }

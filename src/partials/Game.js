@@ -1,6 +1,7 @@
 import { SVG_NS, KEYS, GAMEOPTIONS } from "../settings.js";
 import Board from "./Board.js";
 import Player from "./Player.js";
+import Ball from "./Ball.js";
 
 export default class Game {
   constructor(elementID, width, height) {
@@ -32,6 +33,13 @@ export default class Game {
       KEYS.up,
       KEYS.down,
     )
+
+    this.gameBall = new Ball (
+      this.height,
+      this.width,
+      GAMEOPTIONS.ballSize,
+      KEYS.spaceBar,
+      )
   }
 
   render() {
@@ -46,6 +54,9 @@ export default class Game {
     this.board.render(svg)
     this.player1.render(svg)
     this.player2.render(svg)
+    this.gameBall.render(svg)
+    this.gameBall.ballMovement()
+
 
   }
 }

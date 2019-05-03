@@ -14,7 +14,10 @@ export const GAMEOPTIONS = {
     paddleWidth: 8,
     paddleHeight: 56,
     boardGap: 10,
-    boardColor: "#353535",
+    boardColor: "#5e965b",
     boardWideness: '512',
     boardHighness: '256',
+    ballColor: "#C6ED2C",
+    ballSize: 10,
+    paddleColor: "white"
 }
