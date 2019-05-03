@@ -7,6 +7,7 @@ export const KEYS = {
     up: "ArrowUp",
     down: "ArrowDown",
     spaceBar: " ",
+    pauseKey: "p",
   }
 
 export const GAMEOPTIONS = {

@@ -9,6 +9,8 @@ export default class Game {
     this.height = height;
     this.gameElement = document.getElementById(elementID)
     this.board = new Board(this.width, this.height)
+    this.paused = false
+
 
     this.paddleWidth = GAMEOPTIONS.paddleWidth;
     this.paddleHeight = GAMEOPTIONS.paddleHeight;
@@ -40,9 +42,16 @@ export default class Game {
       GAMEOPTIONS.ballSize,
       KEYS.spaceBar,
       )
+
+      document.addEventListener('keydown', (event) => {
+        if (event.key === KEYS.pauseKey ){
+          this.paused = !this.paused
+        }
+      })
   }
 
   render() {
+    if (this.paused) return
     this.gameElement.innerHTML = ""
 
     let svg = document.createElementNS(SVG_NS, "svg")
@@ -56,7 +65,6 @@ export default class Game {
     this.player2.render(svg)
     this.gameBall.render(svg)
 
-
-  }
+}
 }
 
