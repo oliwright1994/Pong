@@ -61,6 +61,7 @@ export default class Game {
 
       document.addEventListener('keydown', (event) => {
         if (event.key === KEYS.newGameKey ){
+          this.paused = false
           this.gameBall.reset()
           this.player1.points = 0
           this.player2.points = 0
@@ -89,9 +90,13 @@ export default class Game {
 
     if (this.player1.points === SETTINGS.pointsToWin){
     this.scoreBoard.winScreen(svg, this.player1)
+    this.scoreBoard.render(svg, this.player1, this.player2)
+    this.paused = true
     }
     else if (this.player2.points === SETTINGS.pointsToWin){
       this.scoreBoard.winScreen(svg, this.player1)
+      this.scoreBoard.render(svg, this.player1, this.player2)
+      this.paused = true
     }
 
 
