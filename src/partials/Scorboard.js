@@ -19,6 +19,13 @@ export default class Scoreboard {
 
         let winnerText = document.createTextNode(`WINNER! ${player.name}`)
         winner.appendChild(winnerText);
+
+        let winnerBackground = document.createElementNS(SVG_NS, 'rect')
+        winnerBackground.setAttributeNS(null, "width", this.width)
+        winnerBackground.setAttributeNS(null, "height", this.height)
+        winnerBackground.setAttributeNS(null, "fill", SETTINGS.boardColor )
+
+        mySVG.appendChild(winnerBackground);
         mySVG.appendChild(winner);
 
         this.taDa.play()
