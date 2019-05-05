@@ -1,9 +1,11 @@
 import { SVG_NS, SETTINGS } from "../settings"
+import winSound from "../../public/sounds/win-01.wav";
 
 export default class Scoreboard {
     constructor(width, height,){
         this.width = width;
         this.height = height;
+        this.taDa = new Audio(winSound)
 
       }
 
@@ -18,6 +20,8 @@ export default class Scoreboard {
         let winnerText = document.createTextNode(`WINNER! ${player.name}`)
         winner.appendChild(winnerText);
         mySVG.appendChild(winner);
+
+        this.taDa.play()
     }
 
 

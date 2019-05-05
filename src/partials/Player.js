@@ -13,6 +13,7 @@ export default class Player {
       this.downKey = downKey;
       this.name = playerName
 
+
       document.addEventListener('keydown', (event) => {
         if (event.key === this.upKey ){
           this.up()

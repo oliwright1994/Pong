@@ -1,5 +1,8 @@
 import { SVG_NS, SETTINGS } from "../settings"
 import helpers from "./helpers.js"
+import pingSound from "../../public/sounds/pong-01.wav";
+import pongSound from "../../public/sounds/pong-02.wav";
+import pointSound from "../../public/sounds/point-score.wav";
 
 export default class Ball {
     constructor(boardHeight, boardWidth, size, spaceKey) {
@@ -13,6 +16,9 @@ export default class Ball {
       this.ping = new Audio
       this.reset()
       this.moving = false
+      this.paddlePing = new Audio(pingSound);
+      this.wallPing = new Audio(pongSound)
+      this.pointSound = new Audio(pointSound)
 
       document.addEventListener('keydown', (event) => {
         if (event.key === this.spaceKey && this.moving === false ){
@@ -44,15 +50,18 @@ export default class Ball {
 
         if (hitTop || hitBot) {
            this.vy = -this.vy
+           this.wallPing.play()
        }
 
        else if (hitRight) {
            player1.score += 1
+           this.pointSound.play()
            this.reset()
 
        }
        else if (hitLeft) {
            player2.score += 1;
+           this.pointSound.play()
            this.reset()
        }
     }
@@ -61,7 +70,7 @@ export default class Ball {
 
         if (this.vx > 0){
 
-            const [leftX, rightX, topY, bottomY] = helpers.coordinates(
+            const [leftX, _, topY, bottomY] = helpers.coordinates(
                 player2.x,
                 player2.y,
                 player2.width,
@@ -74,6 +83,7 @@ export default class Ball {
             )
             {
                 this.vx = -this.vx
+                this.paddlePing.play();
             }
         }
 
@@ -91,6 +101,7 @@ export default class Ball {
             )
             {
                 this.vx = -this.vx
+                this.paddlePing.play();
             }
         }
 
