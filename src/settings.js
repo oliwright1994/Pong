@@ -25,4 +25,5 @@ export const SETTINGS = {
     player2Name: "Djokovic",
     player1Name: "Federer",
     pointsToWin: 4,
+    sponsor: "rolex",
 }

@@ -68,7 +68,7 @@ export default class Scoreboard {
     sponsor.setAttributeNS(null, 'font-size', 14)
     sponsor.setAttributeNS(null, 'text-anchor', 'middle')
 
-    let rolex = document.createTextNode('Rolex');
+    let rolex = document.createTextNode(SETTINGS.sponsor);
     sponsor.appendChild(rolex);
 
     let scoreDash = document.createElementNS(SVG_NS, 'text')
