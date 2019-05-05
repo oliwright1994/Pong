@@ -83,14 +83,14 @@ export default class Game {
     this.player2.render(svg)
     this.scoreBoard.render(svg, this.player1, this.player2)
 
-    if (this.player1.score < SETTINGS.pointsToWin && this.player2.score < SETTINGS.pointsToWin ){
+    if (this.player1.points < SETTINGS.pointsToWin && this.player2.points < SETTINGS.pointsToWin ){
     this.gameBall.render(svg, this.player1, this.player2)
     }
 
-    if (this.player1.score === SETTINGS.pointsToWin){
+    if (this.player1.points === SETTINGS.pointsToWin){
     this.scoreBoard.winScreen(svg, this.player1)
     }
-    else if (this.player2.score === SETTINGS.pointsToWin){
+    else if (this.player2.points === SETTINGS.pointsToWin){
       this.scoreBoard.winScreen(svg, this.player1)
     }
 

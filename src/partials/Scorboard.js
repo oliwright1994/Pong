@@ -31,7 +31,7 @@ export default class Scoreboard {
     score1.setAttributeNS(null, 'fill', 'yellow')
     score1.setAttributeNS(null, 'x', (this.width/2) - 10)
     score1.setAttributeNS(null, 'y', (this.height/4))
-    score1.setAttributeNS(null, 'font-size', (this.height/5))
+    score1.setAttributeNS(null, 'font-size', (this.height/10))
     score1.setAttributeNS(null, 'text-anchor', 'end')
 
     let newScore1 = document.createTextNode(player1.score);
@@ -41,7 +41,7 @@ export default class Scoreboard {
     score2.setAttributeNS(null, 'fill', 'yellow')
     score2.setAttributeNS(null, 'x', (this.width/2) + 10)
     score2.setAttributeNS(null, 'y', (this.height/4))
-    score2.setAttributeNS(null, 'font-size', (this.height/5))
+    score2.setAttributeNS(null, 'font-size', (this.height/10))
     score2.setAttributeNS(null, 'text-anchor', 'start')
 
 
@@ -63,7 +63,7 @@ export default class Scoreboard {
     scoreDash.setAttributeNS(null, 'fill', 'yellow')
     scoreDash.setAttributeNS(null, 'x', (this.width/2))
     scoreDash.setAttributeNS(null, 'y', (this.height/4))
-    scoreDash.setAttributeNS(null, 'font-size', this.height/6)
+    scoreDash.setAttributeNS(null, 'font-size', this.height/10)
     scoreDash.setAttributeNS(null, 'text-anchor', 'middle')
 
 

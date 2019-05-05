@@ -54,15 +54,43 @@ export default class Ball {
        }
 
        else if (hitRight) {
-           player1.score += 1
+           player1.points += 1
            this.pointSound.play()
            this.reset()
+           switch (player1.points) {
+            case 1:
+              player1.score = "15";
+              break;
+            case 2:
+              player1.score = "30";
+              break;
+            case 3:
+              player1.score = "40";
+              break;
+            case 4:
+              player1.score = "Game";
+              break;
+           }
 
        }
        else if (hitLeft) {
-           player2.score += 1;
+           player2.points += 1;
            this.pointSound.play()
            this.reset()
+           switch (player2.points) {
+            case 1:
+              player2.score= "15";
+              break;
+            case 2:
+              player2.score= "30";
+              break;
+            case 3:
+              player2.score= "40";
+              break;
+            case 4:
+              player2.score= "Game";
+              break;
+           }
        }
     }
 
@@ -107,10 +135,6 @@ export default class Ball {
 
     }
 
-    winScreen(player){
-        let winner = player
-    }
-
 
     render(mySvg, player1, player2){
 
@@ -140,7 +164,7 @@ export default class Ball {
       mySvg.appendChild(path2)
 
 
-      this.wallBounce()
+      this.wallBounce(player1, player2)
       this.paddleBounce(player1, player2)
   }
 }

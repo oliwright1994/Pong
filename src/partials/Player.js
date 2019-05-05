@@ -8,7 +8,8 @@ export default class Player {
       this.x = x;
       this.y = y;
       this.speed = SETTINGS.speed;
-      this.score = 0;
+      this.points = 0;
+      this.score = "love"
       this.upKey = upKey;
       this.downKey = downKey;
       this.name = playerName
@@ -44,6 +45,30 @@ export default class Player {
         paddle.setAttributeNS(null, "y", this.y)
         paddle.setAttributeNS(null, "fill", SETTINGS.paddleColor)
 
+        let playerHead = document.createElementNS(SVG_NS, 'rect')
+        playerHead.setAttributeNS(null, "width", this.width)
+        playerHead.setAttributeNS(null, "height", this.height/5)
+        playerHead.setAttributeNS(null, "x", this.x)
+        playerHead.setAttributeNS(null, "y", this.y)
+        playerHead.setAttributeNS(null, "fill", "tan")
+
+        let playerHair = document.createElementNS(SVG_NS, 'rect')
+        playerHair.setAttributeNS(null, "width", this.width)
+        playerHair.setAttributeNS(null, "height", this.height/10)
+        playerHair.setAttributeNS(null, "x", this.x)
+        playerHair.setAttributeNS(null, "y", this.y)
+        playerHair.setAttributeNS(null, "fill", "black")
+
+        let playerLeg = document.createElementNS(SVG_NS, 'rect')
+        playerLeg.setAttributeNS(null, "width", this.width)
+        playerLeg.setAttributeNS(null, "height", this.height/6)
+        playerLeg.setAttributeNS(null, "x", this.x)
+        playerLeg.setAttributeNS(null, "y", this.y + this.height - this.height/4)
+        playerLeg.setAttributeNS(null, "fill", "tan")
+
         mySvg.appendChild(paddle)
+        mySvg.appendChild(playerHead)
+        mySvg.appendChild(playerLeg)
+        mySvg.appendChild(playerHair)
     }
 }

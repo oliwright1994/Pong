@@ -16,7 +16,7 @@ export const SETTINGS = {
     paddleWidth: 8,
     paddleHeight: 56,
     boardGap: 10,
-    boardColor: "#5e965b",
+    boardColor: "#4AC948",
     boardWideness: '512',
     boardHighness: '256',
     ballColor: "#C6ED2C",
@@ -24,5 +24,5 @@ export const SETTINGS = {
     paddleColor: "white",
     player1Name: "Player 1",
     player2Name: "Player 2",
-    pointsToWin: 5,
+    pointsToWin: 4,
 }
