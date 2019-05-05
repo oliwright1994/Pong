@@ -5,7 +5,7 @@ import pongSound from "../../public/sounds/pong-02.wav";
 import pointSound from "../../public/sounds/point-score.wav";
 
 export default class Ball {
-    constructor(boardHeight, boardWidth, size, spaceKey) {
+    constructor(boardHeight, boardWidth, size, spaceKey, player1, player2) {
       this.boardHeight = boardHeight;
       this.boardWidth = boardWidth;
       this.size = size;
@@ -114,19 +114,34 @@ export default class Ball {
 
     render(mySvg, player1, player2){
 
-        this.x += this.vx;
-        this.y += this.vy;
+      this.x += this.vx;
+      this.y += this.vy;
 
-        let ball = document.createElementNS(SVG_NS, 'circle')
-        ball.setAttributeNS(null, "r", this.size)
-        ball.setAttributeNS(null, "cx", this.x)
-        ball.setAttributeNS(null, "cy", this.y)
-        ball.setAttributeNS(null, "fill", SETTINGS.ballColor)
+      let ball = document.createElementNS(SVG_NS, 'circle')
+      ball.setAttributeNS(null, "r", this.size)
+      ball.setAttributeNS(null, "cx", this.x)
+      ball.setAttributeNS(null, "cy", this.y)
+      ball.setAttributeNS(null, "fill", SETTINGS.ballColor)
 
-        mySvg.appendChild(ball)
+      let path1 = document.createElementNS(SVG_NS, 'path')
+      path1.setAttributeNS(null, "d", `M ${this.x} ${(this.y - this.size)} Q ${this.x} ${this.y} ${(this.x + this.size)} ${this.y}`)
+      path1.setAttributeNS(null, "stroke-width", 3)
+      path1.setAttributeNS(null, "stroke", "white")
+      path1.setAttributeNS(null, "fill", "transparent")
+
+      let path2 = document.createElementNS(SVG_NS, 'path')
+      path2.setAttributeNS(null, "d", `M ${this.x} ${(this.y + this.size)} Q ${this.x} ${this.y} ${(this.x - this.size)} ${this.y}`)
+      path2.setAttributeNS(null, "stroke-width", 3)
+      path2.setAttributeNS(null, "stroke", "white")
+      path2.setAttributeNS(null, "fill", "transparent")
+
+      mySvg.appendChild(ball)
+      mySvg.appendChild(path1)
+      mySvg.appendChild(path2)
 
 
-        this.wallBounce(player1, player2)
-        this.paddleBounce(player1, player2)
-    }
+      this.wallBounce()
+      this.paddleBounce(player1, player2)
+  }
 }
+
