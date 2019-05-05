@@ -8,9 +8,10 @@ export const KEYS = {
     down: "ArrowDown",
     spaceBar: " ",
     pauseKey: "p",
+    newGameKey: 'r'
   }
 
-export const GAMEOPTIONS = {
+export const SETTINGS = {
     speed: 30,
     paddleWidth: 8,
     paddleHeight: 56,
@@ -20,5 +21,8 @@ export const GAMEOPTIONS = {
     boardHighness: '256',
     ballColor: "#C6ED2C",
     ballSize: 10,
-    paddleColor: "white"
+    paddleColor: "white",
+    player1Name: "Player 1",
+    player2Name: "Player 2",
+    pointsToWin: 5,
 }

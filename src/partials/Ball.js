@@ -1,4 +1,4 @@
-import { SVG_NS, GAMEOPTIONS } from "../settings"
+import { SVG_NS, SETTINGS } from "../settings"
 import helpers from "./helpers.js"
 
 export default class Ball {
@@ -12,10 +12,12 @@ export default class Ball {
       this.spaceKey = spaceKey;
       this.ping = new Audio
       this.reset()
+      this.moving = false
 
       document.addEventListener('keydown', (event) => {
-        if (event.key === this.spaceKey ){
+        if (event.key === this.spaceKey && this.moving === false ){
           this.ballMovementStart();
+          this.moving = true
         }
     })
 }
@@ -25,6 +27,7 @@ export default class Ball {
         this.y = this.boardHeight / 2;
         this.vy = 0;
         this.vx = 0;
+        this.moving = false
     }
 
     ballMovementStart(){
@@ -93,6 +96,11 @@ export default class Ball {
 
     }
 
+    winScreen(player){
+        let winner = player
+    }
+
+
     render(mySvg, player1, player2){
 
         this.x += this.vx;
@@ -102,7 +110,7 @@ export default class Ball {
         ball.setAttributeNS(null, "r", this.size)
         ball.setAttributeNS(null, "cx", this.x)
         ball.setAttributeNS(null, "cy", this.y)
-        ball.setAttributeNS(null, "fill", GAMEOPTIONS.ballColor)
+        ball.setAttributeNS(null, "fill", SETTINGS.ballColor)
 
         mySvg.appendChild(ball)
 

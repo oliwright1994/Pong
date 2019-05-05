@@ -1,4 +1,4 @@
-import { SVG_NS, KEYS, GAMEOPTIONS } from "../settings.js";
+import { SVG_NS, KEYS, SETTINGS } from "../settings.js";
 import Board from "./Board.js";
 import Player from "./Player.js";
 import Ball from "./Ball.js";
@@ -13,9 +13,9 @@ export default class Game {
     this.paused = false
 
 
-    this.paddleWidth = GAMEOPTIONS.paddleWidth;
-    this.paddleHeight = GAMEOPTIONS.paddleHeight;
-    this.boardGap = GAMEOPTIONS.boardGap;
+    this.paddleWidth = SETTINGS.paddleWidth;
+    this.paddleHeight = SETTINGS.paddleHeight;
+    this.boardGap = SETTINGS.boardGap;
 
     this.player1 = new Player(
       this.height,
@@ -25,6 +25,7 @@ export default class Game {
       ((this.height - this.paddleHeight) / 2),
       KEYS.w,
       KEYS.s,
+      SETTINGS.player1Name,
     )
 
     this.player2 = new Player (
@@ -35,12 +36,13 @@ export default class Game {
       ((this.height - this.paddleHeight) / 2),
       KEYS.up,
       KEYS.down,
+      SETTINGS.player2Name,
     )
 
     this.gameBall = new Ball (
       this.height,
       this.width,
-      GAMEOPTIONS.ballSize,
+      SETTINGS.ballSize,
       KEYS.spaceBar,
       )
 
@@ -54,6 +56,14 @@ export default class Game {
       document.addEventListener('keydown', (event) => {
         if (event.key === KEYS.pauseKey ){
           this.paused = !this.paused
+        }
+      })
+
+      document.addEventListener('keydown', (event) => {
+        if (event.key === KEYS.newGameKey ){
+          this.gameBall.reset()
+          this.player1.score = 0
+          this.player2.score = 0
         }
       })
   }
@@ -71,8 +81,19 @@ export default class Game {
     this.board.render(svg)
     this.player1.render(svg)
     this.player2.render(svg)
-    this.gameBall.render(svg, this.player1, this.player2)
     this.scoreBoard.render(svg, this.player1, this.player2)
+
+    if (this.player1.score < SETTINGS.pointsToWin && this.player2.score < SETTINGS.pointsToWin ){
+    this.gameBall.render(svg, this.player1, this.player2)
+    }
+
+    if (this.player1.score === SETTINGS.pointsToWin){
+    this.scoreBoard.winScreen(svg, this.player1)
+    }
+    else if (this.player2.score === SETTINGS.pointsToWin){
+      this.scoreBoard.winScreen(svg, this.player1)
+    }
+
 
 }
 }

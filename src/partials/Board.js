@@ -1,4 +1,4 @@
-import { SVG_NS, GAMEOPTIONS } from "../settings"
+import { SVG_NS, SETTINGS } from "../settings"
 
 export default class Board {
     constructor(width, height){
@@ -11,7 +11,7 @@ export default class Board {
     let board = document.createElementNS(SVG_NS, 'rect')
     board.setAttributeNS(null, "width", this.width)
     board.setAttributeNS(null, "height", this.height)
-    board.setAttributeNS(null, "fill", GAMEOPTIONS.boardColor )
+    board.setAttributeNS(null, "fill", SETTINGS.boardColor )
 
 
 

@@ -1,17 +1,17 @@
-import { SVG_NS, GAMEOPTIONS } from "../settings"
+import { SVG_NS, SETTINGS } from "../settings"
 
 export default class Player {
-    constructor(boardHeight, width, height, x, y, upKey, downKey) {
+    constructor(boardHeight, width, height, x, y, upKey, downKey, playerName) {
       this.boardHeight = boardHeight;
       this.width = width;
       this.height = height;
       this.x = x;
       this.y = y;
-      this.speed = GAMEOPTIONS.speed;
+      this.speed = SETTINGS.speed;
       this.score = 0;
       this.upKey = upKey;
       this.downKey = downKey;
-      this.score = 0
+      this.name = playerName
 
       document.addEventListener('keydown', (event) => {
         if (event.key === this.upKey ){
@@ -41,7 +41,7 @@ export default class Player {
         paddle.setAttributeNS(null, "height", this.height)
         paddle.setAttributeNS(null, "x", this.x)
         paddle.setAttributeNS(null, "y", this.y)
-        paddle.setAttributeNS(null, "fill", GAMEOPTIONS.paddleColor)
+        paddle.setAttributeNS(null, "fill", SETTINGS.paddleColor)
 
         mySvg.appendChild(paddle)
     }
