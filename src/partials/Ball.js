@@ -1,8 +1,9 @@
 import { SVG_NS, SETTINGS } from "../settings"
 import helpers from "./helpers.js"
-import pingSound from "../../public/sounds/pong-01.wav";
-import pongSound from "../../public/sounds/pong-02.wav";
-import pointSound from "../../public/sounds/point-score.wav";
+import forehandSound1 from "../../public/sounds/forehand.wav";
+import forehandSound2 from "../../public/sounds/forehand2.wav";
+import pongSound from "../../public/sounds/ball-bounce.wav";
+import pointSound from "../../public/sounds/applause.wav";
 
 export default class Ball {
     constructor(boardHeight, boardWidth, size, spaceKey, player1, player2) {
@@ -16,7 +17,8 @@ export default class Ball {
       this.ping = new Audio
       this.reset()
       this.moving = false
-      this.paddlePing = new Audio(pingSound);
+      this.paddlePing1 = new Audio(forehandSound1);
+      this.paddlePing2 = new Audio(forehandSound2);
       this.wallPing = new Audio(pongSound)
       this.pointSound = new Audio(pointSound)
 
@@ -110,8 +112,8 @@ export default class Ball {
                 (this.y >= topY && this.y <= bottomY)
             )
             {
+              this.paddlePing1.play()
                 this.vx = -this.vx - 1;
-                this.paddlePing.play();
             }
         }
 
@@ -128,13 +130,11 @@ export default class Ball {
                 (this.y >= topY && this.y <= bottomY)
             )
             {
+              this.paddlePing2.play()
                 this.vx = -this.vx + 1;
-                this.paddlePing.play();
             }
         }
-
     }
-
 
     render(mySvg, player1, player2){
 
@@ -147,22 +147,18 @@ export default class Ball {
       ball.setAttributeNS(null, "cy", this.y)
       ball.setAttributeNS(null, "fill", SETTINGS.ballColor)
 
-      let path1 = document.createElementNS(SVG_NS, 'path')
-      path1.setAttributeNS(null, "d", `M ${this.x} ${(this.y - this.size)} Q ${this.x} ${this.y} ${(this.x + this.size)} ${this.y}`)
-      path1.setAttributeNS(null, "stroke-width", 3)
-      path1.setAttributeNS(null, "stroke", "white")
-      path1.setAttributeNS(null, "fill", "transparent")
+      let whiteLineTop = document.createElementNS(SVG_NS, 'path')
+      whiteLineTop.setAttributeNS(null, "d", `M ${this.x} ${(this.y - this.size)} Q ${this.x} ${this.y} ${(this.x + this.size)} ${this.y}`)
+      whiteLineTop.setAttributeNS(null, "stroke-width", 3)
+      whiteLineTop.setAttributeNS(null, "stroke", "white")
+      whiteLineTop.setAttributeNS(null, "fill", "transparent")
 
-      let path2 = document.createElementNS(SVG_NS, 'path')
-      path2.setAttributeNS(null, "d", `M ${this.x} ${(this.y + this.size)} Q ${this.x} ${this.y} ${(this.x - this.size)} ${this.y}`)
-      path2.setAttributeNS(null, "stroke-width", 3)
-      path2.setAttributeNS(null, "stroke", "white")
-      path2.setAttributeNS(null, "fill", "transparent")
+      let whiteLineBot = whiteLineTop.cloneNode(true)
+      whiteLineBot.setAttributeNS(null, "d", `M ${this.x} ${(this.y + this.size)} Q ${this.x} ${this.y} ${(this.x - this.size)} ${this.y}`)
 
       mySvg.appendChild(ball)
-      mySvg.appendChild(path1)
-      mySvg.appendChild(path2)
-
+      mySvg.appendChild(whiteLineTop)
+      mySvg.appendChild(whiteLineBot)
 
       this.wallBounce(player1, player2)
       this.paddleBounce(player1, player2)

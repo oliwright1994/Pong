@@ -22,7 +22,7 @@ export const SETTINGS = {
     ballColor: "#C6ED2C",
     ballSize: 10,
     paddleColor: "white",
-    player1Name: "Player 1",
-    player2Name: "Player 2",
+    player2Name: "Djokovic",
+    player1Name: "Federer",
     pointsToWin: 4,
 }

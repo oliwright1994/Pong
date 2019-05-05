@@ -1,5 +1,5 @@
 import { SVG_NS, SETTINGS } from "../settings"
-import winSound from "../../public/sounds/win-01.wav";
+import winSound from "../../public/sounds/victory.wav";
 
 export default class Scoreboard {
     constructor(width, height,){
@@ -17,7 +17,7 @@ export default class Scoreboard {
         winner.setAttributeNS(null, 'font-size', (this.height/7))
         winner.setAttributeNS(null, 'text-anchor', 'middle')
 
-        let winnerText = document.createTextNode(`WINNER! ${player.name}`)
+        let winnerText = document.createTextNode(`WINNER! ${player.name}!`)
         winner.appendChild(winnerText);
         mySVG.appendChild(winner);
 
@@ -37,16 +37,29 @@ export default class Scoreboard {
     let newScore1 = document.createTextNode(player1.score);
     score1.appendChild(newScore1);
 
-    let score2 = document.createElementNS(SVG_NS, 'text')
-    score2.setAttributeNS(null, 'fill', 'yellow')
+    let score2 = score1.cloneNode(false)
     score2.setAttributeNS(null, 'x', (this.width/2) + 10)
-    score2.setAttributeNS(null, 'y', (this.height/4))
-    score2.setAttributeNS(null, 'font-size', (this.height/10))
     score2.setAttributeNS(null, 'text-anchor', 'start')
-
 
     let newScore2 = document.createTextNode(player2.score);
     score2.appendChild(newScore2);
+
+    let player1Name = document.createElementNS(SVG_NS, 'text')
+    player1Name.setAttributeNS(null, 'fill', 'yellow')
+    player1Name.setAttributeNS(null, 'x', (this.width/2) + 10)
+    player1Name.setAttributeNS(null, 'y', (this.height/6))
+    player1Name.setAttributeNS(null, 'font-size', 16)
+    player1Name.setAttributeNS(null, 'text-anchor', 'start')
+
+    let newPlayer1Name = document.createTextNode(player1.name);
+    player1Name.appendChild(newPlayer1Name);
+
+    let player2Name = player1Name.cloneNode(false)
+    player2Name.setAttributeNS(null, 'x', (this.width/2) - 10)
+    player2Name.setAttributeNS(null, 'text-anchor', 'end')
+
+    let newPlayer2Name = document.createTextNode(player2.name);
+    player2Name.appendChild(newPlayer2Name);
 
     let sponsor = document.createElementNS(SVG_NS, 'text')
     sponsor.setAttributeNS(null, 'fill', 'yellow')
@@ -54,7 +67,6 @@ export default class Scoreboard {
     sponsor.setAttributeNS(null, 'y', (this.height/12))
     sponsor.setAttributeNS(null, 'font-size', 14)
     sponsor.setAttributeNS(null, 'text-anchor', 'middle')
-
 
     let rolex = document.createTextNode('Rolex');
     sponsor.appendChild(rolex);
@@ -65,7 +77,6 @@ export default class Scoreboard {
     scoreDash.setAttributeNS(null, 'y', (this.height/4))
     scoreDash.setAttributeNS(null, 'font-size', this.height/10)
     scoreDash.setAttributeNS(null, 'text-anchor', 'middle')
-
 
     let dash = document.createTextNode('-');
     scoreDash.appendChild(dash);
@@ -79,7 +90,6 @@ export default class Scoreboard {
     scoreBoardBoard.setAttributeNS(null, "stroke", "black")
     scoreBoardBoard.setAttributeNS(null, "stroke-width", 3)
 
-
     let scoreBoardStripeTop = document.createElementNS(SVG_NS, 'line')
     scoreBoardStripeTop.setAttributeNS(null, "stroke", "rgb(84, 0, 139)")
     scoreBoardStripeTop.setAttributeNS(null, "stroke-width", 3)
@@ -88,12 +98,8 @@ export default class Scoreboard {
     scoreBoardStripeTop.setAttributeNS(null, "x2", (this.width/2) + (this.height/6)*2 -2)
     scoreBoardStripeTop.setAttributeNS(null, "y2", 10)
 
-    let scoreBoardStripeBot = document.createElementNS(SVG_NS, 'line')
-    scoreBoardStripeBot.setAttributeNS(null, "stroke", "rgb(84, 0, 139)")
-    scoreBoardStripeBot.setAttributeNS(null, "stroke-width", 3)
-    scoreBoardStripeBot.setAttributeNS(null, "x1", (this.width/2) - (this.height/6)*2 +2)
+    let scoreBoardStripeBot = scoreBoardStripeTop.cloneNode(true)
     scoreBoardStripeBot.setAttributeNS(null, "y1", this.height/3 - 10)
-    scoreBoardStripeBot.setAttributeNS(null, "x2", (this.width/2) + (this.height/6)*2 -2)
     scoreBoardStripeBot.setAttributeNS(null, "y2", this.height/3 - 10)
 
     mySvg.appendChild(scoreBoardBoard)
@@ -103,6 +109,9 @@ export default class Scoreboard {
     mySvg.appendChild(score2)
     mySvg.appendChild(sponsor)
     mySvg.appendChild(scoreDash)
+    mySvg.appendChild(player1Name)
+    mySvg.appendChild(player2Name)
+
 
     }
   }

@@ -62,8 +62,8 @@ export default class Game {
       document.addEventListener('keydown', (event) => {
         if (event.key === KEYS.newGameKey ){
           this.gameBall.reset()
-          this.player1.score = 0
-          this.player2.score = 0
+          this.player1.points = 0
+          this.player2.points = 0
         }
       })
   }
