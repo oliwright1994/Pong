@@ -82,7 +82,7 @@ export default class Ball {
                 (this.y >= topY && this.y <= bottomY)
             )
             {
-                this.vx = -this.vx
+                this.vx = -this.vx - 1;
                 this.paddlePing.play();
             }
         }
@@ -100,7 +100,7 @@ export default class Ball {
                 (this.y >= topY && this.y <= bottomY)
             )
             {
-                this.vx = -this.vx
+                this.vx = -this.vx + 1;
                 this.paddlePing.play();
             }
         }
