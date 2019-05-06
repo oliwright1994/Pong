@@ -55,6 +55,7 @@ export default class Ball {
 
        else if (hitRight) {
            player1.score += 1;
+           pongBot.level += 1;
            this.pointSound.play()
            this.reset()
 

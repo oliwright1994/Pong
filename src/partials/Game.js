@@ -31,9 +31,8 @@ export default class Game {
 
     this.bot = new PongBot (
       this.height,
-      this.paddleWidth,
       this.paddleHeight,
-      (this.width - this.paddleWidth - this.boardGap),
+      (this.width - this.paddleWidth - 32),
       ((this.height - this.paddleHeight) / 2),
     )
 
@@ -63,6 +62,7 @@ export default class Game {
           this.gameBall.reset()
           this.player1.score = 0
           this.bot.score = 0
+          this.bot.level = 1
         }
       })
   }

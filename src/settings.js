@@ -24,4 +24,5 @@ export const SETTINGS = {
     player1Name: "Player 1",
     pongBotName: "Player 2",
     pointsToWin: 5,
+    pongBotSpeed: 5,
 }

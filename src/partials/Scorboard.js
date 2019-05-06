@@ -20,9 +20,8 @@ export default class Scoreboard {
             case 2:
               endGameMessage = "PONGBOT IS TOO STRONG!";
               break;
-            case 3:
+            default:
               endGameMessage = "TRY AGAIN PUNY MORTAL!";
-              break;
         }
         let winner = document.createElementNS(SVG_NS, 'text')
         winner.setAttributeNS(null, 'fill', 'black')
@@ -75,18 +74,20 @@ export default class Scoreboard {
 
     let score1 = document.createElementNS(SVG_NS, 'text')
     score1.setAttributeNS(null, 'fill', 'white')
-    score1.setAttributeNS(null, 'x', (this.width/2) - (this.height/5))
+    score1.setAttributeNS(null, 'x', (this.width/2) - (this.height/8))
     score1.setAttributeNS(null, 'y', (this.height/5))
     score1.setAttributeNS(null, 'font-size', (this.height/5))
+    score1.setAttributeNS(null, 'text-anchor', 'middle')
 
     let newScore1 = document.createTextNode(player1.score);
     score1.appendChild(newScore1);
 
     let score2 = document.createElementNS(SVG_NS, 'text')
     score2.setAttributeNS(null, 'fill', 'white')
-    score2.setAttributeNS(null, 'x', (this.width/2) + 15)
+    score2.setAttributeNS(null, 'x', (this.width/2) + (this.height/8))
     score2.setAttributeNS(null, 'y', (this.height/5))
     score2.setAttributeNS(null, 'font-size', (this.height/5))
+    score2.setAttributeNS(null, 'text-anchor', 'middle')
 
     let newScore2 = document.createTextNode(pongBot.score);
     score2.appendChild(newScore2);
