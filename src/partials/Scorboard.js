@@ -1,15 +1,29 @@
 import { SVG_NS, SETTINGS } from "../settings"
 import winSound from "../../public/sounds/win-01.wav";
+import pongBotWinSound from "../../public/sounds/pong-04.wav";
 
 export default class Scoreboard {
     constructor(width, height,){
         this.width = width;
         this.height = height;
         this.taDa = new Audio(winSound)
+        this.pongBotWinSound = new Audio(pongBotWinSound)
 
       }
 
       winScreenPongBot(mySVG) {
+        let endGameMessage = "Something has gone wrong :/"
+        switch (Math.round(Math.random() * 3)) {
+            case 1:
+              endGameMessage = "THE FLESH IS WEAK!";
+              break;
+            case 2:
+              endGameMessage = "PONGBOT IS TOO STRONG!";
+              break;
+            case 3:
+              endGameMessage = "TRY AGAIN PUNY MORTAL!";
+              break;
+        }
         let winner = document.createElementNS(SVG_NS, 'text')
         winner.setAttributeNS(null, 'fill', 'black')
         winner.setAttributeNS(null, 'x', (this.width/2))
@@ -17,7 +31,7 @@ export default class Scoreboard {
         winner.setAttributeNS(null, 'font-size', (this.width/15))
         winner.setAttributeNS(null, 'text-anchor', 'middle')
 
-        let winnerText = document.createTextNode(`WINNER! PONGBOT!`)
+        let winnerText = document.createTextNode(`${endGameMessage}`)
         winner.appendChild(winnerText);
 
         let winnerBackground = document.createElementNS(SVG_NS, 'rect')
@@ -28,7 +42,8 @@ export default class Scoreboard {
         mySVG.appendChild(winnerBackground);
         mySVG.appendChild(winner);
 
-        this.taDa.play()
+        this.pongBotWinSound.play()
+
 
       }
 

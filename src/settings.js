@@ -23,5 +23,5 @@ export const SETTINGS = {
     paddleColor: "white",
     player1Name: "Player 1",
     pongBotName: "Player 2",
-    pointsToWin: 1,
+    pointsToWin: 5,
 }

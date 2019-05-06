@@ -12,7 +12,6 @@ export default class Player {
       this.upKey = upKey;
       this.downKey = downKey;
       this.name = playerName;
-      this.handicap = 1;
 
 
       document.addEventListener('keydown', (event) => {
@@ -32,7 +31,7 @@ export default class Player {
     }
 
     down(){
-        if (this.y < this.boardHeight-this.height*this.handicap){
+        if (this.y < this.boardHeight-this.height){
         this.y += this.speed
         }
     }
@@ -40,7 +39,7 @@ export default class Player {
     render(mySvg) {
         let paddle = document.createElementNS(SVG_NS, 'rect')
         paddle.setAttributeNS(null, "width", this.width)
-        paddle.setAttributeNS(null, "height", this.height*this.handicap)
+        paddle.setAttributeNS(null, "height", this.height)
         paddle.setAttributeNS(null, "x", this.x)
         paddle.setAttributeNS(null, "y", this.y)
         paddle.setAttributeNS(null, "fill", SETTINGS.paddleColor)

@@ -25,8 +25,8 @@ export default class Ball {
           this.ballMovementStart();
           this.moving = true
         }
-    })
-}
+      })
+     }
 
     reset(){
         this.x = this.boardWidth / 2;
@@ -70,7 +70,7 @@ export default class Ball {
 
         if (this.vx > 0){
 
-            let [leftX, _, topY, bottomY] = helpers.coordinates(
+            let [leftX, rightX, topY, bottomY] = helpers.coordinates(
                 pongBot.x,
                 pongBot.y,
                 pongBot.width,
@@ -85,10 +85,14 @@ export default class Ball {
                 this.vx = -this.vx - 2;
                 this.paddlePing.play();
             }
-        }
+
+            else if (((this.y + this.size) === topY && this.x > leftX && this.x < rightX || (this.y - this.size) === bottomY && this.x > leftX && this.x < rightX )) {
+              this.vy = -this.vy
+            }
+          }
 
         else {
-            let [_, rightX, topY, bottomY] = helpers.coordinates(
+            let [leftX, rightX, topY, bottomY] = helpers.coordinates(
                 player1.x,
                 player1.y,
                 player1.width,
@@ -97,14 +101,20 @@ export default class Ball {
 
             if (
                 this.x - this.size <= rightX &&
-                (this.y >= topY && this.y <= bottomY)
+                (this.y > topY && this.y < bottomY)
             )
             {
                 this.vx = -this.vx + 2;
                 this.paddlePing.play();
             }
+
+            else if ((this.y + this.size) === topY && this.x > leftX && this.x < rightX || (this.y - this.size) === bottomY && this.x > leftX && this.x < rightX ){
+              this.vy = -this.vy
+            }
+
+          }
         }
-    }
+
 
 
     render(mySvg, player1, pongBot){
@@ -124,4 +134,6 @@ export default class Ball {
         this.wallBounce(player1, pongBot)
         this.paddleBounce(player1, pongBot)
     }
-}
+
+
+  }
