@@ -62,7 +62,7 @@ export default class Game {
           this.paused = false
           this.gameBall.reset()
           this.player1.score = 0
-          this.pongBot.score = 0
+          this.bot.score = 0
         }
       })
   }
@@ -79,19 +79,19 @@ export default class Game {
 
     this.board.render(svg)
     this.player1.render(svg)
-    // this.bot.render(svg)
+    this.bot.render(svg, this.gameBall, this.board)
     this.scoreBoard.render(svg, this.player1, this.bot)
 
-    if (this.player1.score < SETTINGS.pointsToWin && this.pongBot.score < SETTINGS.pointsToWin ){
-    this.gameBall.render(svg, this.player1, this.pongBot)
+    if (this.player1.score < SETTINGS.pointsToWin && this.bot.score < SETTINGS.pointsToWin ){
+    this.gameBall.render(svg, this.player1, this.bot)
     }
 
     if (this.player1.score === SETTINGS.pointsToWin){
     this.scoreBoard.winScreen(svg, this.player1)
     this.paused = true
     }
-    else if (this.pongBot.score === SETTINGS.pointsToWin){
-      this.scoreBoard.winScreen(svg, this.player1)
+    else if (this.bot.score === SETTINGS.pointsToWin){
+      this.scoreBoard.winScreenPongBot(svg, this.bot)
       this.paused = true
     }
 

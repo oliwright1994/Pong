@@ -32,7 +32,7 @@ export default class Player {
     }
 
     down(){
-        if (this.y < this.boardHeight-this.height){
+        if (this.y < this.boardHeight-this.height*this.handicap){
         this.y += this.speed
         }
     }

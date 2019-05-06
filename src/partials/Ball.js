@@ -41,7 +41,7 @@ export default class Ball {
         this.vx = this.direction * (6 - Math.abs(this.vy));
     }
 
-    wallBounce(player1, player2) {
+    wallBounce(player1, pongBot) {
         const hitTop = this.y - this.size <= 0
         const hitBot = this.y + this.size >= this.boardHeight
 
@@ -55,28 +55,26 @@ export default class Ball {
 
        else if (hitRight) {
            player1.score += 1;
-           player2.handicap += 0.5;
            this.pointSound.play()
            this.reset()
 
        }
        else if (hitLeft) {
-           player2.score += 1;
-           player1.handicap += 0.5;
+           pongBot.score += 1;
            this.pointSound.play()
            this.reset()
        }
     }
 
-    paddleBounce(player1, player2){
+    paddleBounce(player1, pongBot){
 
         if (this.vx > 0){
 
             let [leftX, _, topY, bottomY] = helpers.coordinates(
-                player2.x,
-                player2.y,
-                player2.width,
-                player2.height*player2.handicap,
+                pongBot.x,
+                pongBot.y,
+                pongBot.width,
+                pongBot.height,
             )
 
             if (
@@ -84,7 +82,7 @@ export default class Ball {
                 (this.y >= topY && this.y <= bottomY)
             )
             {
-                this.vx = -this.vx - 2*player2.handicap;
+                this.vx = -this.vx - 2;
                 this.paddlePing.play();
             }
         }
@@ -94,7 +92,7 @@ export default class Ball {
                 player1.x,
                 player1.y,
                 player1.width,
-                player1.height*player1.handicap,
+                player1.height,
             )
 
             if (
@@ -102,14 +100,14 @@ export default class Ball {
                 (this.y >= topY && this.y <= bottomY)
             )
             {
-                this.vx = -this.vx + (2*player1.handicap);
+                this.vx = -this.vx + 2;
                 this.paddlePing.play();
             }
         }
     }
 
 
-    render(mySvg, player1, player2){
+    render(mySvg, player1, pongBot){
 
         this.x += this.vx;
         this.y += this.vy;
@@ -123,7 +121,7 @@ export default class Ball {
         mySvg.appendChild(ball)
 
 
-        this.wallBounce(player1, player2)
-        this.paddleBounce(player1, player2)
+        this.wallBounce(player1, pongBot)
+        this.paddleBounce(player1, pongBot)
     }
 }

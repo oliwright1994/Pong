@@ -7,7 +7,7 @@ export default class PongBot {
       this.boardHeight = boardHeight;
       this.x = x;
       this.y = y;
-      this.speed = 30;
+      this.speed = 5;
       this.score = 0;
       this.name = "PongBot";
     }
@@ -24,7 +24,16 @@ export default class PongBot {
         }
     }
 
-    render(mySvg) {
+    botAI(ball, board){
+        if(ball.x > (board.width* 2/3) && ball.y < this.y){
+            this.up()
+        }
+        else if(ball.x > (board.width* 2/3) && ball.y > this.y){
+            this.down()
+        }
+    }
+
+    render(mySvg, ball, board) {
         let paddle = document.createElementNS(SVG_NS, 'rect')
         paddle.setAttributeNS(null, "width", this.width)
         paddle.setAttributeNS(null, "height", this.height)
@@ -33,5 +42,9 @@ export default class PongBot {
         paddle.setAttributeNS(null, "fill", SETTINGS.paddleColor)
 
         mySvg.appendChild(paddle)
+
+        this.botAI(ball, board)
+
+
     }
 }

@@ -9,12 +9,35 @@ export default class Scoreboard {
 
       }
 
+      winScreenPongBot(mySVG) {
+        let winner = document.createElementNS(SVG_NS, 'text')
+        winner.setAttributeNS(null, 'fill', 'black')
+        winner.setAttributeNS(null, 'x', (this.width/2))
+        winner.setAttributeNS(null, 'y', (this.height/2))
+        winner.setAttributeNS(null, 'font-size', (this.width/15))
+        winner.setAttributeNS(null, 'text-anchor', 'middle')
+
+        let winnerText = document.createTextNode(`WINNER! PONGBOT!`)
+        winner.appendChild(winnerText);
+
+        let winnerBackground = document.createElementNS(SVG_NS, 'rect')
+        winnerBackground.setAttributeNS(null, "width", this.width)
+        winnerBackground.setAttributeNS(null, "height", this.height)
+        winnerBackground.setAttributeNS(null, "fill", SETTINGS.boardColor )
+
+        mySVG.appendChild(winnerBackground);
+        mySVG.appendChild(winner);
+
+        this.taDa.play()
+
+      }
+
       winScreen(mySVG, player) {
         let winner = document.createElementNS(SVG_NS, 'text')
         winner.setAttributeNS(null, 'fill', 'black')
         winner.setAttributeNS(null, 'x', (this.width/2))
         winner.setAttributeNS(null, 'y', (this.height/2))
-        winner.setAttributeNS(null, 'font-size', (this.height/7))
+        winner.setAttributeNS(null, 'font-size', (this.width/15))
         winner.setAttributeNS(null, 'text-anchor', 'middle')
 
         let winnerText = document.createTextNode(`WINNER! ${player.name}`)
@@ -32,7 +55,8 @@ export default class Scoreboard {
     }
 
 
-  render(mySvg, player1, player2){
+
+  render(mySvg, player1, pongBot){
 
     let score1 = document.createElementNS(SVG_NS, 'text')
     score1.setAttributeNS(null, 'fill', 'white')
@@ -49,7 +73,7 @@ export default class Scoreboard {
     score2.setAttributeNS(null, 'y', (this.height/5))
     score2.setAttributeNS(null, 'font-size', (this.height/5))
 
-    let newScore2 = document.createTextNode(player2.score);
+    let newScore2 = document.createTextNode(pongBot.score);
     score2.appendChild(newScore2);
 
     mySvg.appendChild(score1)

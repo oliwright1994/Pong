@@ -22,6 +22,6 @@ export const SETTINGS = {
     ballSize: 10,
     paddleColor: "white",
     player1Name: "Player 1",
-    player2Name: "Player 2",
-    pointsToWin: 10,
+    pongBotName: "Player 2",
+    pointsToWin: 1,
 }
