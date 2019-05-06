@@ -12,7 +12,7 @@ export const KEYS = {
   }
 
 export const SETTINGS = {
-    speed: 30,
+    speed: 40,
     botSpeed: 30,
     paddleWidth: 8,
     paddleHeight: 56,
@@ -24,5 +24,5 @@ export const SETTINGS = {
     player1Name: "Player 1",
     pongBotName: "Player 2",
     pointsToWin: 5,
-    pongBotSpeed: 5,
+    pongBotSpeed: 2,
 }
