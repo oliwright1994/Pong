@@ -54,13 +54,15 @@ export default class Ball {
        }
 
        else if (hitRight) {
-           player1.score += 1
+           player1.score += 1;
+           player2.handicap += 0.5;
            this.pointSound.play()
            this.reset()
 
        }
        else if (hitLeft) {
            player2.score += 1;
+           player1.handicap += 0.5;
            this.pointSound.play()
            this.reset()
        }
@@ -70,11 +72,11 @@ export default class Ball {
 
         if (this.vx > 0){
 
-            const [leftX, _, topY, bottomY] = helpers.coordinates(
+            let [leftX, _, topY, bottomY] = helpers.coordinates(
                 player2.x,
                 player2.y,
                 player2.width,
-                player2.height
+                player2.height*player2.handicap,
             )
 
             if (
@@ -82,17 +84,17 @@ export default class Ball {
                 (this.y >= topY && this.y <= bottomY)
             )
             {
-                this.vx = -this.vx - 1;
+                this.vx = -this.vx - 2*player2.handicap;
                 this.paddlePing.play();
             }
         }
 
         else {
-            const [_, rightX, topY, bottomY] = helpers.coordinates(
+            let [_, rightX, topY, bottomY] = helpers.coordinates(
                 player1.x,
                 player1.y,
                 player1.width,
-                player1.height
+                player1.height*player1.handicap,
             )
 
             if (
@@ -100,15 +102,10 @@ export default class Ball {
                 (this.y >= topY && this.y <= bottomY)
             )
             {
-                this.vx = -this.vx + 1;
+                this.vx = -this.vx + (2*player1.handicap);
                 this.paddlePing.play();
             }
         }
-
-    }
-
-    winScreen(player){
-        let winner = player
     }
 
 
