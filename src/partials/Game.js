@@ -3,6 +3,7 @@ import Board from "./Board.js";
 import Player from "./Player.js";
 import Ball from "./Ball.js";
 import Scoreboard from "./Scorboard.js";
+import PongBot from "./PongBot.js";
 
 export default class Game {
   constructor(elementID, width, height) {
@@ -28,15 +29,12 @@ export default class Game {
       SETTINGS.player1Name,
     )
 
-    this.player2 = new Player (
+    this.bot = new PongBot (
       this.height,
       this.paddleWidth,
       this.paddleHeight,
       (this.width - this.paddleWidth - this.boardGap),
       ((this.height - this.paddleHeight) / 2),
-      KEYS.up,
-      KEYS.down,
-      SETTINGS.player2Name,
     )
 
     this.gameBall = new Ball (
@@ -64,7 +62,7 @@ export default class Game {
           this.paused = false
           this.gameBall.reset()
           this.player1.score = 0
-          this.player2.score = 0
+          this.pongBot.score = 0
         }
       })
   }
@@ -81,18 +79,18 @@ export default class Game {
 
     this.board.render(svg)
     this.player1.render(svg)
-    this.player2.render(svg)
-    this.scoreBoard.render(svg, this.player1, this.player2)
+    // this.bot.render(svg)
+    this.scoreBoard.render(svg, this.player1, this.bot)
 
-    if (this.player1.score < SETTINGS.pointsToWin && this.player2.score < SETTINGS.pointsToWin ){
-    this.gameBall.render(svg, this.player1, this.player2)
+    if (this.player1.score < SETTINGS.pointsToWin && this.pongBot.score < SETTINGS.pointsToWin ){
+    this.gameBall.render(svg, this.player1, this.pongBot)
     }
 
     if (this.player1.score === SETTINGS.pointsToWin){
     this.scoreBoard.winScreen(svg, this.player1)
     this.paused = true
     }
-    else if (this.player2.score === SETTINGS.pointsToWin){
+    else if (this.pongBot.score === SETTINGS.pointsToWin){
       this.scoreBoard.winScreen(svg, this.player1)
       this.paused = true
     }

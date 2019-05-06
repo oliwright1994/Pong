@@ -4,7 +4,7 @@ import Game from './partials/Game';
 
 
 // create a game instance
-const game = new Game('game', 512*1.5 , 512*1.2);
+const game = new Game('game', 512 , 512);
 
 
 (function gameLoop() {

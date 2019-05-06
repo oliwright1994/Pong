@@ -13,6 +13,7 @@ export const KEYS = {
 
 export const SETTINGS = {
     speed: 30,
+    botSpeed: 30,
     paddleWidth: 8,
     paddleHeight: 56,
     boardGap: 10,
