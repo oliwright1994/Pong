@@ -43,6 +43,9 @@ export default class PongBot {
         head.setAttributeNS(null, "x", this.x)
         head.setAttributeNS(null, "y", this.y)
         head.setAttributeNS(null, "fill", "white")
+        head.setAttributeNS(null, "rx", 3)
+        head.setAttributeNS(null, "ry", 3)
+
 
         let leftEye = document.createElementNS(SVG_NS, 'rect')
         leftEye.setAttributeNS(null, "width", this.width/8)
