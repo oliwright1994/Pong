@@ -50,6 +50,8 @@ export default class PongBot {
         leftEye.setAttributeNS(null, "x", this.x+(this.width/4))
         leftEye.setAttributeNS(null, "y", this.y+this.height/5)
         leftEye.setAttributeNS(null, "fill", "black")
+        leftEye.setAttributeNS(null, "rx", 3)
+
 
         let rightEye = leftEye.cloneNode(true)
         rightEye.setAttributeNS(null, "x", this.x+ this.width*0.75 - this.width/8)
