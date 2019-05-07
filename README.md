@@ -31,7 +31,7 @@ https://github.com/bob/pong-project
 Update the `predeploy` script as follows:
 
 ```json
-"predeploy": "rm -rf dist && parcel build index.html --public-url /pong-project",
+"predeploy": "rm -rf dist && parcel build index.html --public-url /project-03-pong",
 ```
 
 Once you have done this, you can run:
